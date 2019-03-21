@@ -14,6 +14,8 @@ export default class UserList extends Component {
                 this.setState({ users: response.data });
             })
             .catch(error => console.log(error));
+        this.props.displayName(this.props.selectedUser);
+        console.log('This is name: ', this.props.selectedUser);
     }
 
     render() {
@@ -26,11 +28,21 @@ export default class UserList extends Component {
                             <section
                                 className="userItem"
                                 key={user.id}
-                                onClick={() => {
+                                onClick={event => {
+                                    console.log(
+                                        'This is name: ',
+                                        event.target.value
+                                    );
                                     //Check if user select different 'User' and if so reassign the user Id: this.props.onUserSelect(user.id)
                                     if (this.props.selectedUser !== user.id) {
                                         this.props.onUserSelect(user.id);
                                     }
+
+                                    this.props.displayName(user.id);
+                                    console.log(
+                                        'This is name: ',
+                                        event.target.value
+                                    );
 
                                     //**** This code created an issue for select user functionality
                                     //**** If you click 2 times on the same user it will reassign the state to nothing: this.props.onUserSelect('');
@@ -50,7 +62,7 @@ export default class UserList extends Component {
                                             : null
                                 }}
                             >
-                                <p>{user.name}</p>
+                                <p value={user.id}>{user.name}</p>
                             </section>
                         );
                     })}

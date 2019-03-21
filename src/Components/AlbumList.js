@@ -42,12 +42,29 @@ export default class AlbumList extends Component {
                     this.setState({ albums: response.data });
                 })
                 .catch(error => console.log(error));
+
+            axios
+                .get(
+                    `https://jsonplaceholder.typicode.com/users/${
+                        this.state.userId
+                    }`
+                )
+                .then(res => {
+                    console.log('This is axios response for username: ', res);
+                    this.setState({ userName: res.data.name });
+                    console.log(
+                        'This is axios response for username: ',
+                        this.state.userName
+                    );
+                })
+                .catch(error => console.log(error));
         }
     }
 
     render() {
         return (
             <React.Fragment>
+                <h2 className="albumList">{this.state.userName}</h2>
                 <select
                     className="albumList"
                     onChange={event => {
@@ -81,7 +98,6 @@ export default class AlbumList extends Component {
                         );
                     })}
                 </select>
-                <span>{this.state.userName}</span>
             </React.Fragment>
         );
     }
