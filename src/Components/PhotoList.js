@@ -51,7 +51,6 @@ export default class PhotoList extends Component {
         return (
             <React.Fragment>
                 <article className="photoList">
-                    <h2>PhotoList</h2>
                     {this.state.photos.map(item => {
                         return <img key={item.id} src={item.thumbnailUrl} />;
                     })}

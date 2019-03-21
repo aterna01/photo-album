@@ -4,6 +4,7 @@ import axios from 'axios';
 export default class AlbumList extends Component {
     state = {
         userId: this.props.selectedUser,
+        userName: '',
         albums: []
     };
 
@@ -47,37 +48,40 @@ export default class AlbumList extends Component {
     render() {
         return (
             <React.Fragment>
-                <article className="albumList">
-                    <h2>AlbumList</h2>
-                    <select
-                        onChange={event => {
-                            ////Check if user select different 'Album'
-                            //If so reassign the album Id: this.props.onAlbumSelect(event.target.value);
-                            //event.target.value = album.id from Json
-                            this.props.onAlbumSelect(event.target.value);
-                            console.log(
-                                'This is event target value: ',
-                                event.target.value
-                            );
-                        }}
-                    >
-                        <option defaultValue>Select Album</option>
-                        {this.state.albums.map(album => {
-                            console.log(
-                                'This is state.userId: ' + this.state.userId
-                            );
-                            return (
-                                <option
-                                    className="albumList"
-                                    key={album.id}
-                                    value={album.id}
-                                >
-                                    {album.title}
-                                </option>
-                            );
-                        })}
-                    </select>
-                </article>
+                <select
+                    className="albumList"
+                    onChange={event => {
+                        ////Check if user select different 'Album'
+                        //If so reassign the album Id: this.props.onAlbumSelect(event.target.value);
+                        //event.target.value = album.id from Json
+                        this.props.onAlbumSelect(event.target.value);
+                        console.log(
+                            'This is event target value: ',
+                            event.target.value
+                        );
+                        console.log(
+                            'This is event target key: ',
+                            event.target.key
+                        );
+                    }}
+                >
+                    <option defaultValue>Select Album</option>
+                    {this.state.albums.map(album => {
+                        console.log(
+                            'This is state.userId: ' + this.state.userId
+                        );
+                        return (
+                            <option
+                                className="albumList"
+                                key={album.id}
+                                value={album.id}
+                            >
+                                {album.title}
+                            </option>
+                        );
+                    })}
+                </select>
+                <span>{this.state.userName}</span>
             </React.Fragment>
         );
     }

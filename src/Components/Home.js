@@ -6,7 +6,8 @@ import PhotoList from './PhotoList';
 export default class Home extends Component {
     state = {
         user: '',
-        album: ''
+        album: '',
+        userName: ''
     };
 
     //Funcion change state of this.state.user
@@ -22,6 +23,21 @@ export default class Home extends Component {
             album: albumId
         });
     };
+
+    //  updateName() {
+    //     axios
+    //         .get(
+    //             `https://jsonplaceholder.typicode.com/users/${
+    //                 this.state.user
+    //             }`
+    //         )
+    //         .then(res => {
+    //             console.log('This is axios response for username: ', res);
+    //             this.setState({ userName: res.name });
+    //             console.log('This is axios response for username: ', res);
+    //         })
+    //         .catch(error => console.log(error));
+    // }
 
     render() {
         return (
