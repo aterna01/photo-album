@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 
 export default class UserList extends Component {
@@ -11,7 +10,7 @@ export default class UserList extends Component {
         axios
             .get('https://jsonplaceholder.typicode.com/users')
             .then(response => {
-                //console.log(response);
+                // console.log(response);
                 this.setState({ users: response.data });
             })
             .catch(error => console.log(error));
@@ -28,15 +27,26 @@ export default class UserList extends Component {
                                 className="userList"
                                 key={user.id}
                                 onClick={() => {
-                                    this.props.selectedUser !== user.id
-                                        ? this.props.onUserSelect(user.id)
-                                        : this.props.onUserSelect('');
+                                    //Check if user select different 'User' and if so reassign the user Id: this.props.onUserSelect(user.id)
+                                    if (this.props.selectedUser !== user.id) {
+                                        this.props.onUserSelect(user.id);
+                                    }
+
+                                    //**** This code created an issue for select user functionality
+                                    //**** If you click 2 times on the same user it will reassign the state to nothing: this.props.onUserSelect('');
+
+                                    // this.props.selectedUser !== user.id
+                                    //     ? this.props.onUserSelect(user.id)
+                                    //     : this.props.onUserSelect('');
+                                    // console.log(this.props.selectedUser);
+                                    // console.log(this.state.users);
                                 }}
+                                //Style the selected user
                                 style={{
                                     cursor: 'pointer',
                                     backgroundColor:
                                         user.id === this.props.selectedUser
-                                            ? 'yellow'
+                                            ? '#aaaaaa'
                                             : null
                                 }}
                             >

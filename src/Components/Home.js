@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
 import UserList from './UserList';
 import AlbumList from './AlbumList';
 import PhotoList from './PhotoList';
 
 export default class Home extends Component {
     state = {
-        User: '',
-        Album: ''
+        user: '',
+        album: ''
     };
 
+    //Funcion change state of this.state.user
     onsUserSelect = userId => {
         this.setState({
-            User: userId
+            user: userId
         });
     };
 
+    //Function change state of this.state.album
     onAlbumSelect = albumId => {
         this.setState({
-            Album: albumId
+            album: albumId
         });
     };
 
@@ -29,16 +30,17 @@ export default class Home extends Component {
                     <h1>Photo Album</h1>
 
                     <UserList
-                        selectedUser={this.state.User}
+                        selectedUser={this.state.user}
                         onUserSelect={this.onsUserSelect}
                     />
 
                     <AlbumList
-                        selectedAlbum={this.state.Album}
+                        selectedUser={this.state.user}
+                        selectedAlbum={this.state.album}
                         onAlbumSelect={this.onAlbumSelect}
                     />
 
-                    <PhotoList selectedAlbum={this.state.Album} />
+                    <PhotoList selectedAlbum={this.state.album} />
                 </main>
             </React.Fragment>
         );
