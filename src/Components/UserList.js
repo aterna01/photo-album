@@ -19,14 +19,14 @@ export default class UserList extends Component {
     render() {
         return (
             <React.Fragment>
-                <section className="userContainer">
+                <section className="userList">
                     <h2> Users</h2>
                     {this.state.users.map(user => {
                         return (
                             <section
-                                className="userList"
+                                className="userItem"
                                 key={user.id}
-                                onClick={() => {
+                                onClick={event => {
                                     //Check if user select different 'User' and if so reassign the user Id: this.props.onUserSelect(user.id)
                                     if (this.props.selectedUser !== user.id) {
                                         this.props.onUserSelect(user.id);
@@ -50,7 +50,7 @@ export default class UserList extends Component {
                                             : null
                                 }}
                             >
-                                {user.name}
+                                <p>{user.name}</p>
                             </section>
                         );
                     })}

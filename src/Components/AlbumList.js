@@ -4,6 +4,7 @@ import axios from 'axios';
 export default class AlbumList extends Component {
     state = {
         userId: this.props.selectedUser,
+        userName: '',
         albums: []
     };
 
@@ -41,43 +42,62 @@ export default class AlbumList extends Component {
                     this.setState({ albums: response.data });
                 })
                 .catch(error => console.log(error));
+
+            axios
+                .get(
+                    `https://jsonplaceholder.typicode.com/users/${
+                        this.state.userId
+                    }`
+                )
+                .then(res => {
+                    console.log('This is axios response for username: ', res);
+                    this.setState({ userName: res.data.name });
+                    console.log(
+                        'This is axios response for username: ',
+                        this.state.userName
+                    );
+                })
+                .catch(error => console.log(error));
         }
     }
 
     render() {
         return (
             <React.Fragment>
-                <article className="albumList">
-                    <h2>AlbumList</h2>
-                    <select
-                        onChange={event => {
-                            ////Check if user select different 'Album'
-                            //If so reassign the album Id: this.props.onAlbumSelect(event.target.value);
-                            //event.target.value = album.id from Json
-                            this.props.onAlbumSelect(event.target.value);
-                            console.log(
-                                'This is event target value: ',
-                                event.target.value
-                            );
-                        }}
-                    >
-                        <option defaultValue>Select Album</option>
-                        {this.state.albums.map(album => {
-                            console.log(
-                                'This is state.userId: ' + this.state.userId
-                            );
-                            return (
-                                <option
-                                    className="albumList"
-                                    key={album.id}
-                                    value={album.id}
-                                >
-                                    {album.title}
-                                </option>
-                            );
-                        })}
-                    </select>
-                </article>
+                <h2 className="albumList">{this.state.userName}</h2>
+                <select
+                    className="albumList"
+                    onChange={event => {
+                        ////Check if user select different 'Album'
+                        //If so reassign the album Id: this.props.onAlbumSelect(event.target.value);
+                        //event.target.value = album.id from Json
+                        this.props.onAlbumSelect(event.target.value);
+                        console.log(
+                            'This is event target value: ',
+                            event.target.value
+                        );
+                        console.log(
+                            'This is event target key: ',
+                            event.target.key
+                        );
+                    }}
+                >
+                    <option defaultValue>Select Album</option>
+                    {this.state.albums.map(album => {
+                        console.log(
+                            'This is state.userId: ' + this.state.userId
+                        );
+                        return (
+                            <option
+                                className="albumList"
+                                key={album.id}
+                                value={album.id}
+                            >
+                                {album.title}
+                            </option>
+                        );
+                    })}
+                </select>
             </React.Fragment>
         );
     }

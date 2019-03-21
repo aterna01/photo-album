@@ -1,39 +1,60 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-        'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-        'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+main {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-template-rows: 15% 4% 40% 40%;
+    grid-column-gap: 1em;
+    justify-content: space-evenly;
+
+    grid-template-areas:
+        'header header header'
+        'userList albumList albumList'
+        'userList photoList photoList'
+        'userList photoList photoList';
 }
 
-main h1 {
-    text-align: center;
+h1 {
+    grid-area: header;
+    justify-self: center;
+
     font-size: 2em;
 }
 
-.userContainer {
-    /* width: 30%; */
-    margin: 1.5em;
-    max-width: 30em;
-    float: left;
-}
 h2 {
-    margin: 1.5em;
+    margin-top: 1em;
     text-align: center;
 }
 
 .userList {
     border: 1px solid black;
+    grid-area: userList;
+}
+
+.userItem {
+    border: 1px solid black;
+    margin: 0.5em;
+}
+
+.userItem p {
+    margin: 0.25em;
+    text-align: center;
 }
 
 .albumList {
-    width: 60%;
-    float: right;
+    grid-area: albumList;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+.albumList h2 {
+    grid-area: albumList;
+    justify-self: center;
+}
+
+.photoList {
+    grid-area: photoList;
+    margin-top: 2em;
+    height: 200px;
+}
+
+.photoList img {
+    width: 4em;
+    height: 4em;
 }
